@@ -3,8 +3,6 @@ library(ggplot2)
 library(tidyverse)
 library(devtools)
 
-# setwd("~/Google Drive/Harvard/Shiny/ci-sims")
-
 
 # Note: this code is adapted from Joshua Loyal's shiny app:
 # https://github.com/joshloyal/confidence-interval-app/blob/master/app.R
