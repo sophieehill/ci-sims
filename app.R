@@ -3,6 +3,8 @@ library(ggplot2)
 library(tidyverse)
 library(devtools)
 
+# setwd("~/Google Drive/Harvard/Shiny/ci-sims")
+
 
 # Note: this code is adapted from Joshua Loyal's shiny app:
 # https://github.com/joshloyal/confidence-interval-app/blob/master/app.R
@@ -47,6 +49,7 @@ ui <- fluidPage(
                            max = 1,
                            step = 0.05,
                            value = 0.4),
+               actionButton("refresh_button", "Refresh"),
                hr(),
                br(),
                p('Github Repo: ', a('sophieehill/ci-sims',
@@ -61,9 +64,11 @@ ui <- fluidPage(
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
-    
+
     output$IntervalPlot <- renderPlot({
-        set.seed(123)
+        # set.seed(123)
+        input$refresh_button # This makes the renderPlot depend on the go_button
+        
         
         n_samples = input$n_samples
         sample_size = input$sample_size
@@ -132,10 +137,10 @@ server <- function(input, output) {
             scale_color_manual(values=c("true" = "#009E73", "false" = "#D55E00"))
         
         
-    
         p
     })
-}
+    }
+
 
 # Run the application
 shinyApp(ui = ui, server = server)
